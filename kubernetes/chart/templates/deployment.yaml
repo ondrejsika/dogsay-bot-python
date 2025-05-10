@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: main
+          image: ondrejsika/dogsay-bot-python
+          env:
+            - name: TELEGRAM_BOT_TOKEN
+              value: {{ required ".Values.TELEGRAM_BOT_TOKEN is required" .Values.TELEGRAM_BOT_TOKEN }}
