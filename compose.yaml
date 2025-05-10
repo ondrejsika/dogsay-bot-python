@@ -1,0 +1,6 @@
+services:
+  bot:
+    image: ondrejsika/dogsay-bot-python
+    build: .
+    environment:
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN?}
