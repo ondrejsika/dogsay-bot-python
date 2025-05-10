@@ -15,6 +15,7 @@ spec:
       containers:
         - name: main
           image: ondrejsika/dogsay-bot-python
+          imagePullPolicy: Always
           env:
             - name: TELEGRAM_BOT_TOKEN
               value: {{ required ".Values.TELEGRAM_BOT_TOKEN is required" .Values.TELEGRAM_BOT_TOKEN }}
