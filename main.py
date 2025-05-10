@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from telegram import Update
+from telegram import Update, BotCommand
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
@@ -24,4 +24,10 @@ if __name__ == '__main__':
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler('start', start_command))
     app.add_handler(CommandHandler('dogsay', chatid_command))
+
+    async def set_commands(app):
+        await app.bot.set_my_commands([
+            BotCommand(command="dogsay", description="Make the dog say something"),
+        ])
+    app.post_init = set_commands
     app.run_polling()
